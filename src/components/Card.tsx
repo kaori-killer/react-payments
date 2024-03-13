@@ -18,22 +18,22 @@ type CardProps = {
   expirationDate: ExpirationDateType;
 };
 
+const specialCharacter = (
+  value: string,
+  limit: number,
+  specialCharacter: string
+) => (value.length === limit ? specialCharacter : '');
+
+const SLASH = '/';
+const HYPHEN = '-';
+
 export default function Card({
   variant,
   cardNumber,
   ownerName,
   expirationDate,
 }: CardProps) {
-  const SLASH = '/';
-  const HYPHEN = '-';
-
   const cardClassName = `card-text${variant === 'big' ? '__big' : ''}`;
-
-  const specialCharacter = (
-    value: string,
-    limit: number,
-    specialCharacter: string
-  ) => (value.length === limit ? specialCharacter : '');
 
   return (
     <>
