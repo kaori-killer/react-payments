@@ -23,7 +23,15 @@ import isFulledCardForm from '../../utils/isFulledCardForm';
 
 const cardAlias = '';
 
-export default function AddCardForm() {
+type AddCardFormProps = {
+  handleClickAddCardFormNext: (id: number) => void;
+  goPrevStep: () => void;
+};
+
+export default function AddCardForm({
+  handleClickAddCardFormNext,
+  goPrevStep,
+}: AddCardFormProps) {
   const id = useRef(Math.floor(Math.random() * 1_000_000)).current;
 
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
@@ -64,8 +72,10 @@ export default function AddCardForm() {
 
   const location = !isFormFilled ? '' : `/add/complete/${String(id)}`;
 
-  const handleClickButton = () => {
+  const handleClickNext = () => {
     setIsClick(true);
+
+    console.log(cardNumber);
 
     addCardInList({
       id,
@@ -78,12 +88,14 @@ export default function AddCardForm() {
       cardCompanyColor,
       cardAlias,
     });
+
+    handleClickAddCardFormNext(id);
   };
 
   return (
     <div className="root">
       <div className="app">
-        <Header />
+        <Header goPrevStep={goPrevStep} />
         <CardBox backgroundColor={cardCompanyColor}>
           <Card
             variant="small"
@@ -107,13 +119,21 @@ export default function AddCardForm() {
           cardPassword={cardPassword}
           setCardPassword={setCardPassword}
         />
-        <ClickableLink
+        {/* 수정 */}
+        {/* <ClickableLink
           location={location}
           text="다음"
-          onClick={handleClickButton}
+          onClick={handleClickNext}
           disable={!isFormFilled}
           isClick={isClick}
-        />
+        /> */}
+        <button
+          type="button"
+          onClick={handleClickNext}
+          disabled={!isFormFilled}
+        >
+          다음
+        </button>
       </div>
       {!cardCompany && (
         <CardCompanyList

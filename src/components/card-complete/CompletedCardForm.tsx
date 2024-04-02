@@ -2,7 +2,6 @@ import { useState } from 'react';
 import CardBox from '../CardBox';
 import Card from '../Card';
 import ClickableLink from '../card-add/ClickableLink';
-import Input from '../Input';
 
 import { useCardsContext } from '../hooks/useCardsContext';
 
@@ -11,11 +10,21 @@ import updateValidValue from '../../utils/updateValidValue';
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 import CardCompany from './CardCompany';
 
-export default function CompletedCard() {
-  const url = window.location.href;
-  const parts = url.split('/');
-  const lastPart = parts[parts.length - 1];
-  const id = parseInt(lastPart, 10);
+type CompletedCardProps = {
+  goNextStep: () => void;
+  cardId: number;
+};
+
+export default function CompletedCard({
+  goNextStep,
+  cardId,
+}: CompletedCardProps) {
+  const id = cardId;
+
+  // const url = window.location.href;
+  // const parts = url.split('/');
+  // const lastPart = parts[parts.length - 1];
+  // const id = parseInt(lastPart, 10);
 
   const { getCardInList, editCardInList, deleteCardInList } = useCardsContext();
   const card = getCardInList(id);
@@ -42,6 +51,8 @@ export default function CompletedCard() {
       ...card,
       cardAlias: newCardAlias,
     });
+
+    goNextStep();
   };
 
   const handleClickDelete = () => {

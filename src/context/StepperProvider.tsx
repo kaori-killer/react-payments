@@ -11,7 +11,7 @@ export const StepperContext = createContext({
 });
 
 export default function StepperProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(StepperReducer, initState);
+  // const [state, dispatch] = useReducer(StepperReducer, initState);
 
   return (
     <StepperContext.Provider value={{ state, dispatch }}>
@@ -20,21 +20,15 @@ export default function StepperProvider({ children }: PropsWithChildren) {
   );
 }
 
-function StepperReducer(state, action) {
-  switch (action.type) {
-    case 0:
-      return <CardList />;
-    case 1:
-      return <AddCardForm />;
-    case 2:
-      return <CompletedCard />;
-    default:
-      return state;
-  }
-}
-
-// const steps = [
-//   { path: '/', element: <CardList /> },
-//   { path: '/add', element: <AddCardForm /> },
-//   { path: `/add/complete/:id`, element: <CompletedCard /> },
-// ];
+// function StepperReducer(state, action) {
+//   switch (action.type) {
+//     case 0:
+//       return <CardList />;
+//     case 1:
+//       return <AddCardForm />;
+//     case 2:
+//       return <CompletedCard />;
+//     default:
+//       return state;
+//   }
+// }

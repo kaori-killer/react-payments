@@ -5,7 +5,11 @@ import Card from '../Card';
 
 import { useCardsContext } from '../hooks/useCardsContext';
 
-export default function CardList() {
+type CardListProps = {
+  goNextStep: () => void;
+};
+
+export default function CardList({ goNextStep }: CardListProps) {
   const { cards } = useCardsContext();
 
   const navigate = useNavigate();
@@ -15,7 +19,7 @@ export default function CardList() {
   };
 
   const handleClickAdd = () => {
-    navigate('/add');
+    goNextStep();
   };
 
   const reversedCards = cards.reverse();
