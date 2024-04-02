@@ -8,6 +8,9 @@
 }
 
 .button-basic {
+  border: 0px;
   text-decoration: none;
+  background-color: white;
   color: black;
+  font-size: 15px;
 }
