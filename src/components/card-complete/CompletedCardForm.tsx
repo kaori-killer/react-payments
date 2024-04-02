@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CardBox from '../CardBox';
 import Card from '../Card';
-import ClickableLink from '../card-add/ClickableLink';
+import Button from '../Button';
 
 import { useCardsContext } from '../hooks/useCardsContext';
 
@@ -20,11 +20,6 @@ export default function CompletedCard({
   cardId,
 }: CompletedCardProps) {
   const id = cardId;
-
-  // const url = window.location.href;
-  // const parts = url.split('/');
-  // const lastPart = parts[parts.length - 1];
-  // const id = parseInt(lastPart, 10);
 
   const { getCardInList, editCardInList, deleteCardInList } = useCardsContext();
   const card = getCardInList(id);
@@ -57,6 +52,7 @@ export default function CompletedCard({
 
   const handleClickDelete = () => {
     deleteCardInList(card.id);
+    goNextStep();
   };
 
   return (
@@ -77,16 +73,16 @@ export default function CompletedCard({
         <div className="input-container flex-center w-100">
           <CardCompany cardAlias={cardAlias} onChange={handleChangeCardAlias} />
         </div>
-        <ClickableLink
-          className="mt-55"
-          location="/"
+        <Button
+          type="button"
           text="다음"
+          className="mt-55"
           onClick={handleClickEdit}
         />
-        <ClickableLink
-          className="mt-5"
-          location="/"
+        <Button
+          type="button"
           text="삭제"
+          className="mt-5"
           onClick={handleClickDelete}
         />
       </div>

@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
+
 import AddCardForm from '../card-add/AddCardForm';
 import CompletedCard from '../card-complete/CompletedCardForm';
 import CardList from '../card-list/CardList';
+
 import useStepper from '../hooks/useStepper';
 
 export default function CardManage() {
   const [cardId, setCardId] = useState(0);
   const { currentStep, goNextStep, goPrevStep, resetStep } = useStepper();
 
-  const handleClickAddCardFormNext = (id: number) => {
+  const handleClickNextAddCardForm = (id: number) => {
     setCardId(id);
+    goNextStep();
+  };
+
+  const handleClickNextCompletedCardForm = (id: number) => {
+    setCardId(id);
+    goNextStep();
     goNextStep();
   };
 
@@ -20,13 +28,18 @@ export default function CardManage() {
   }, [currentStep]);
 
   if (currentStep === 0) {
-    return <CardList goNextStep={goNextStep} />;
+    return (
+      <CardList
+        goNextStep={goNextStep}
+        handleClickNextCompletedCardForm={handleClickNextCompletedCardForm}
+      />
+    );
   }
 
   if (currentStep === 1) {
     return (
       <AddCardForm
-        handleClickAddCardFormNext={handleClickAddCardFormNext}
+        handleClickNextAddCardForm={handleClickNextAddCardForm}
         goPrevStep={goPrevStep}
       />
     );

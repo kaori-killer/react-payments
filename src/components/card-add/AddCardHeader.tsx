@@ -1,8 +1,8 @@
-type HeaderProps = {
+type AddCardHeaderProps = {
   goPrevStep: () => void;
 };
 
-export default function Header({ goPrevStep }: HeaderProps) {
+export default function AddCardHeader({ goPrevStep }: AddCardHeaderProps) {
   return (
     <h1 className="page-title">
       <button type="button" className="button-basic" onClick={goPrevStep}>

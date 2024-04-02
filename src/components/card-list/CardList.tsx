@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import CardBox from '../CardBox';
 import Card from '../Card';
 
@@ -7,15 +5,18 @@ import { useCardsContext } from '../hooks/useCardsContext';
 
 type CardListProps = {
   goNextStep: () => void;
+  handleClickNextCompletedCardForm: (id: number) => void;
 };
 
-export default function CardList({ goNextStep }: CardListProps) {
+export default function CardList({
+  goNextStep,
+  handleClickNextCompletedCardForm,
+}: CardListProps) {
   const { cards } = useCardsContext();
 
-  const navigate = useNavigate();
-
   const handleClickEdit = (id: number) => {
-    navigate(`/add/complete/${String(id)}`);
+    console.log(id);
+    handleClickNextCompletedCardForm(id);
   };
 
   const handleClickAdd = () => {

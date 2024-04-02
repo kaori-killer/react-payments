@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import Header from './Header';
+import Header from './AddCardHeader';
 import CardBox from '../CardBox';
 import Card from '../Card';
 import CardNumber from './CardNumber';
@@ -8,8 +8,8 @@ import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
-import ClickableLink from './ClickableLink';
 import CardCompanyList from './CardCompanyList';
+import Button from '../Button';
 
 import type {
   CardNumberType,
@@ -24,12 +24,12 @@ import isFulledCardForm from '../../utils/isFulledCardForm';
 const cardAlias = '';
 
 type AddCardFormProps = {
-  handleClickAddCardFormNext: (id: number) => void;
+  handleClickNextAddCardForm: (id: number) => void;
   goPrevStep: () => void;
 };
 
 export default function AddCardForm({
-  handleClickAddCardFormNext,
+  handleClickNextAddCardForm,
   goPrevStep,
 }: AddCardFormProps) {
   const id = useRef(Math.floor(Math.random() * 1_000_000)).current;
@@ -59,8 +59,6 @@ export default function AddCardForm({
 
   const [cardCompanyColor, setCardCompanyColor] = useState('#e5e5e5');
 
-  const [isClick, setIsClick] = useState(false);
-
   const { addCardInList } = useCardsContext();
 
   const isFormFilled = isFulledCardForm({
@@ -70,13 +68,7 @@ export default function AddCardForm({
     expirationDate,
   });
 
-  const location = !isFormFilled ? '' : `/add/complete/${String(id)}`;
-
   const handleClickNext = () => {
-    setIsClick(true);
-
-    console.log(cardNumber);
-
     addCardInList({
       id,
       cardNumber,
@@ -89,7 +81,7 @@ export default function AddCardForm({
       cardAlias,
     });
 
-    handleClickAddCardFormNext(id);
+    handleClickNextAddCardForm(id);
   };
 
   return (
@@ -119,21 +111,12 @@ export default function AddCardForm({
           cardPassword={cardPassword}
           setCardPassword={setCardPassword}
         />
-        {/* 수정 */}
-        {/* <ClickableLink
-          location={location}
-          text="다음"
-          onClick={handleClickNext}
-          disable={!isFormFilled}
-          isClick={isClick}
-        /> */}
-        <button
+        <Button
           type="button"
-          onClick={handleClickNext}
+          text="다음"
           disabled={!isFormFilled}
-        >
-          다음
-        </button>
+          onClick={handleClickNext}
+        ></Button>
       </div>
       {!cardCompany && (
         <CardCompanyList
