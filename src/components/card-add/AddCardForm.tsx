@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 
 import Header from './AddCardHeader';
-import CardBox from '../CardBox';
-import Card from '../Card';
+import CardContent from '../CardContent';
 import CardNumber from './CardNumber';
 import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
@@ -20,6 +19,7 @@ import type {
 import { useCardsContext } from '../hooks/useCardsContext';
 
 import isFulledCardForm from '../../utils/isFulledCardForm';
+import CardBox from '../CardBox';
 
 const cardAlias = '';
 
@@ -89,7 +89,7 @@ export default function AddCardForm({
       <div className="app">
         <Header goPrevStep={goPrevStep} />
         <CardBox backgroundColor={cardCompanyColor}>
-          <Card
+          <CardContent
             variant="small"
             cardNumber={cardNumber}
             ownerName={ownerName}

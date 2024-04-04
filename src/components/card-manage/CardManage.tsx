@@ -6,6 +6,8 @@ import CardList from '../card-list/CardList';
 
 import useStepper from '../hooks/useStepper';
 
+const STEPS = ['LIST', 'ADD', 'COMPLETE', 'FINISH'] as const;
+
 export default function CardManage() {
   const [cardId, setCardId] = useState(0);
   const { currentStep, goNextStep, goPrevStep, resetStep } = useStepper();
@@ -22,12 +24,12 @@ export default function CardManage() {
   };
 
   useEffect(() => {
-    if (currentStep === 3) {
+    if (STEPS[currentStep] === 'FINISH') {
       resetStep();
     }
   }, [currentStep]);
 
-  if (currentStep === 0) {
+  if (STEPS[currentStep] === 'LIST') {
     return (
       <CardList
         goNextStep={goNextStep}
@@ -36,7 +38,7 @@ export default function CardManage() {
     );
   }
 
-  if (currentStep === 1) {
+  if (STEPS[currentStep] === 'ADD') {
     return (
       <AddCardForm
         handleClickNextAddCardForm={handleClickNextAddCardForm}
@@ -45,7 +47,7 @@ export default function CardManage() {
     );
   }
 
-  if (currentStep === 2) {
+  if (STEPS[currentStep] === 'COMPLETE') {
     return <CompletedCard goNextStep={goNextStep} cardId={cardId} />;
   }
 

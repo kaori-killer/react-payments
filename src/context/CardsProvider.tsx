@@ -6,7 +6,7 @@ import isFulledCardForm from '../utils/isFulledCardForm';
 
 type InitialCards = {
   cards: CardType[];
-  getCardInList: (id: number) => CardType;
+  getCardInList: (id: number) => CardType | null;
   addCardInList: (card: CardType) => void;
   editCardInList: (card: CardType) => void;
   deleteCardInList: (id: number) => void;
@@ -14,7 +14,7 @@ type InitialCards = {
 
 const initialCards: InitialCards = {
   cards: [],
-  getCardInList: () => [],
+  getCardInList: () => null,
   addCardInList: () => null,
   editCardInList: () => null,
   deleteCardInList: () => null,
@@ -25,8 +25,12 @@ export const CardsContext = createContext(initialCards);
 export default function CardsProvider({ children }: PropsWithChildren) {
   const [cards, setCards] = useState<CardType[]>([]);
 
-  const getCardInList = (id: number): CardType => {
-    const targetCard = cards.find((preCard) => preCard.id === id);
+  const getCardInList = (id: number): CardType | null => {
+    const targetCard = cards.find((card) => card.id === id);
+
+    if (targetCard === undefined) {
+      return null;
+    }
 
     return targetCard;
   };

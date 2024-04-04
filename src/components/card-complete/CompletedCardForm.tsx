@@ -1,6 +1,7 @@
 import { useState } from 'react';
+
 import CardBox from '../CardBox';
-import Card from '../Card';
+import CardContent from '../CardContent';
 import Button from '../Button';
 
 import { useCardsContext } from '../hooks/useCardsContext';
@@ -9,6 +10,7 @@ import updateValidValue from '../../utils/updateValidValue';
 
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 import CardCompany from './CardCompany';
+import { CardType } from '../../types/CardFormType';
 
 type CompletedCardProps = {
   goNextStep: () => void;
@@ -19,10 +21,23 @@ export default function CompletedCard({
   goNextStep,
   cardId,
 }: CompletedCardProps) {
-  const id = cardId;
+  const { getCardInList } = useCardsContext();
+  const card = getCardInList(cardId);
 
-  const { getCardInList, editCardInList, deleteCardInList } = useCardsContext();
-  const card = getCardInList(id);
+  if (!card) {
+    return null;
+  }
+
+  return <CompletedCardContent card={card} goNextStep={goNextStep} />;
+}
+
+type CompletedCardContentProps = {
+  card: CardType;
+  goNextStep: () => void;
+};
+
+function CompletedCardContent({ card, goNextStep }: CompletedCardContentProps) {
+  const { editCardInList, deleteCardInList } = useCardsContext();
 
   const [cardAlias, setCardAlias] = useState(card.cardAlias);
 
@@ -55,6 +70,10 @@ export default function CompletedCard({
     goNextStep();
   };
 
+  if (!card) {
+    return null;
+  }
+
   return (
     <div className="root">
       <div className="app flex-column-center">
@@ -62,7 +81,7 @@ export default function CompletedCard({
           <h1 className="page-title mb-10">카드 등록이 완료되었습니다.</h1>
         </div>
         <CardBox backgroundColor={card.cardCompanyColor}>
-          <Card
+          <CardContent
             variant="big"
             cardNumber={card.cardNumber}
             ownerName={card.ownerName}

@@ -1,5 +1,5 @@
 import CardBox from '../CardBox';
-import Card from '../Card';
+import CardContent from '../CardContent';
 
 import { useCardsContext } from '../hooks/useCardsContext';
 
@@ -37,7 +37,7 @@ export default function CardList({
             onClick={() => handleClickEdit(card.id)}
             backgroundColor={card.cardCompanyColor}
           >
-            <Card
+            <CardContent
               variant="small"
               cardNumber={card.cardNumber}
               ownerName={card.ownerName}

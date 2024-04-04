@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Card from './Card';
+import CardContent, { CardProps } from './CardContent';
 import CardBox from './CardBox';
-
-import { CardNumberType, ExpirationDateType } from '../types/CardFormType';
 
 const cardNumber = {
   firstNumber: '1111',
@@ -17,21 +15,9 @@ const expirationDate = {
   year: '23',
 };
 
-type CardProps = {
-  variant: 'big' | 'small';
-  cardNumber: CardNumberType;
-  ownerName: string;
-  expirationDate: ExpirationDateType;
-  cardCompany: string;
-};
-
-const CardContainer = (props: CardProps) => {
-  return <Card {...props} />;
-};
-
-const meta: Meta<typeof CardContainer> = {
-  title: 'CARD/Card',
-  component: CardContainer,
+const meta: Meta<typeof CardContent> = {
+  title: 'CARD/CARD',
+  component: CardContent,
   argTypes: {
     variant: {
       options: ['small', 'big'],
@@ -54,11 +40,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = (args: CardProps) => <CardContainer {...args} />;
-
-export function Empty() {
-  return <p>+</p>;
-}
+export const Default: Story = (args: CardProps) => <CardContent {...args} />;
 
 Default.args = {
   variant: 'small',

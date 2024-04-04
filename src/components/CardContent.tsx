@@ -11,7 +11,7 @@ import {
   EXPIRATION_DATE_YEAR_PLACEHOLDER,
 } from '../constants/cardPlaceHolder';
 
-type CardProps = {
+export type CardProps = {
   variant: 'big' | 'small';
   cardNumber: CardNumberType;
   ownerName: string;

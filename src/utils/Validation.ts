@@ -9,5 +9,9 @@ export function isValidLength(limit: number, value: string) {
 }
 
 export function isValidMonth(value: string) {
+  if (value.length === 1) {
+    return true;
+  }
+
   return Number(value) >= 1 && Number(value) <= 12;
 }
