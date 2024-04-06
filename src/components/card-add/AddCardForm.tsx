@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import Header from './Header';
-import CardBox from '../CardBox';
-import Card from '../Card';
+import Header from './AddCardHeader';
+import CardContent from '../CardContent';
 import CardNumber from './CardNumber';
 import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
-import ClickableLink from './ClickableLink';
+import CardCompanyList from './CardCompanyList';
+import Button from '../Button';
 
 import type {
   CardNumberType,
@@ -16,7 +16,24 @@ import type {
   CardPasswordNumberType,
 } from '../../types/CardFormType';
 
-export default function AddCardForm() {
+import { useCardsContext } from '../hooks/useCardsContext';
+
+import isFulledCardForm from '../../utils/isFulledCardForm';
+import CardBox from '../CardBox';
+
+const cardAlias = '';
+
+type AddCardFormProps = {
+  handleClickNextAddCardForm: (id: number) => void;
+  goPrevStep: () => void;
+};
+
+export default function AddCardForm({
+  handleClickNextAddCardForm,
+  goPrevStep,
+}: AddCardFormProps) {
+  const id = useRef(Math.floor(Math.random() * 1_000_000)).current;
+
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     firstNumber: '',
     secondNumber: '',
@@ -29,25 +46,55 @@ export default function AddCardForm() {
     year: '',
   });
 
-  const [ownerName, setOwnerName] = useState<string>('');
+  const [ownerName, setOwnerName] = useState('');
 
-  const [securityCode, setSecurityCode] = useState<string>('');
+  const [securityCode, setSecurityCode] = useState('');
 
   const [cardPassword, setCardPassword] = useState<CardPasswordNumberType>({
     firstNumber: '',
     secondNumber: '',
   });
 
+  const [cardCompany, setCardCompany] = useState('');
+
+  const [cardCompanyColor, setCardCompanyColor] = useState('#e5e5e5');
+
+  const { addCardInList } = useCardsContext();
+
+  const isFormFilled = isFulledCardForm({
+    cardNumber,
+    cardPassword,
+    securityCode,
+    expirationDate,
+  });
+
+  const handleClickNext = () => {
+    addCardInList({
+      id,
+      cardNumber,
+      expirationDate,
+      ownerName,
+      securityCode,
+      cardPassword,
+      cardCompany,
+      cardCompanyColor,
+      cardAlias,
+    });
+
+    handleClickNextAddCardForm(id);
+  };
+
   return (
     <div className="root">
       <div className="app">
-        <Header />
-        <CardBox>
-          <Card
+        <Header goPrevStep={goPrevStep} />
+        <CardBox backgroundColor={cardCompanyColor}>
+          <CardContent
             variant="small"
             cardNumber={cardNumber}
             ownerName={ownerName}
             expirationDate={expirationDate}
+            cardCompany={cardCompany}
           />
         </CardBox>
         <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
@@ -64,8 +111,19 @@ export default function AddCardForm() {
           cardPassword={cardPassword}
           setCardPassword={setCardPassword}
         />
-        <ClickableLink location="/add/complete" text="다음" />
+        <Button
+          type="button"
+          text="다음"
+          disabled={!isFormFilled}
+          onClick={handleClickNext}
+        ></Button>
       </div>
+      {!cardCompany && (
+        <CardCompanyList
+          setCardCompany={setCardCompany}
+          setCardCompanyColor={setCardCompanyColor}
+        />
+      )}
     </div>
   );
 }

@@ -1,9 +1,10 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
-import routes from './routes';
+import CardManage from './components/card-manage/CardManage';
+import CardsProvider from './context/CardsProvider';
 
 export default function App() {
-  const router = createBrowserRouter(routes);
-
-  return <RouterProvider router={router} />;
+  return (
+    <CardsProvider>
+      <CardManage />
+    </CardsProvider>
+  );
 }
