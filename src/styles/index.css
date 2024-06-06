@@ -41,3 +41,7 @@ input {
 
   color: #383838;
 }
+
+.tooltip-text {
+  font-size: 13px;
+}

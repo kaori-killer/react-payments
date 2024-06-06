@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 import Input from '../Input';
 
@@ -15,11 +15,14 @@ export default function SecurityCode({
   securityCode,
   setSecurityCode,
 }: SecurityCodeProps) {
+  const [isHover, setIsHover] = useState(false);
+
   const handleChangeSecurityCode = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target;
 
+    
     updateValidValue({
       limit: SECURITY_CODE_LIMIT,
       setter: setSecurityCode,
@@ -41,9 +44,12 @@ export default function SecurityCode({
           onChange={handleChangeSecurityCode}
         />
         <img
-          src="src/assets/securityCode_description_icon.png"
+          src="src/assets/cvc_tooltip.png"
           className="w-10 ml-10"
+          onClick={() => setIsHover(true)}
+          onMouseOut={() => setIsHover(false)}
         />
+        {isHover && <p className='tooltip-text ml-10'>카드 뒷면의 3자리를 입력해주세요</p>}
       </div>
     </div>
   );
