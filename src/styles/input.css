@@ -23,6 +23,11 @@
   color: #525252;
 }
 
+.input-content {
+  display: flex;
+  align-items: center;
+}
+
 .input-basic {
   background-color: #ecebf1;
   height: 45px;

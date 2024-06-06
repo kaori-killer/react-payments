@@ -32,13 +32,19 @@ export default function SecurityCode({
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
-      <Input
-        variant="basic"
-        className="w-25"
-        type="password"
-        value={securityCode}
-        onChange={handleChangeSecurityCode}
-      />
+      <div className="input-content">
+        <Input
+          variant="basic"
+          className="w-25"
+          type="password"
+          value={securityCode}
+          onChange={handleChangeSecurityCode}
+        />
+        <img
+          src="src/assets/securityCode_description_icon.png"
+          className="w-10 ml-10"
+        />
+      </div>
     </div>
   );
 }
