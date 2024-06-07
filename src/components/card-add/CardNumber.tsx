@@ -31,7 +31,6 @@ export default function CardNumber({
         }));
       },
       value,
-      isMonth: false,
       isNumber: true,
     });
   };

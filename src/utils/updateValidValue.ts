@@ -4,8 +4,8 @@ type UpdateValidValueProps = {
   limit: number;
   setter: (value: string) => void;
   value: string;
-  isMonth: boolean;
-  isNumber: boolean;
+  isMonth?: boolean;
+  isNumber?: boolean;
 };
 
 export default function updateValidValue({

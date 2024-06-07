@@ -22,8 +22,6 @@ export default function OwnerName({ ownerName, setOwnerName }: OwnerNameProps) {
       limit: OWNER_NAME_LIMIT,
       setter: setOwnerName,
       value,
-      isMonth: false,
-      isNumber: false,
     });
   };
 
