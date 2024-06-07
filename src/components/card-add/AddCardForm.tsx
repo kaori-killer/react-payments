@@ -20,6 +20,7 @@ import { useCardsContext } from '../hooks/useCardsContext';
 
 import isFulledCardForm from '../../utils/isFulledCardForm';
 import CardBox from '../CardBox';
+import { isValidDate } from '../../utils/Validation';
 
 const cardAlias = '';
 
@@ -69,6 +70,14 @@ export default function AddCardForm({
   });
 
   const handleClickNext = () => {
+    // 어디로 빼야할까
+    if (
+      !isValidDate(Number(expirationDate.month), Number(expirationDate.year))
+    ) {
+      alert('유효기간을 확인해주세요');
+      return;
+    }
+
     addCardInList({
       id,
       cardNumber,
