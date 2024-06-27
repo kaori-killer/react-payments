@@ -62,6 +62,8 @@ export default function AddCardForm({
 
   const [cardCompanyColor, setCardCompanyColor] = useState('#e5e5e5');
 
+  const [isShowCardCompanyList, setIsShowCardCompanyList] = useState(true);
+
   const { addCardInList } = useCardsContext();
 
   const changeCardCompany = () => {
@@ -160,10 +162,11 @@ export default function AddCardForm({
           onClick={handleClickNext}
         ></Button>
       </div>
-      {!cardCompany && (
+      {!cardCompany && isShowCardCompanyList && (
         <CardCompanyList
           setCardCompany={setCardCompany}
           setCardCompanyColor={setCardCompanyColor}
+          setIsShowCardCompanyList={setIsShowCardCompanyList}
         />
       )}
     </div>

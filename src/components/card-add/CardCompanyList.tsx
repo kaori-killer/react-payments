@@ -5,6 +5,7 @@ import CardCompanyListRow from './CardCompanyListRow';
 type CardCompanyListProps = {
   setCardCompany: Dispatch<SetStateAction<string>>;
   setCardCompanyColor: Dispatch<SetStateAction<string>>;
+  setIsShowCardCompanyList: Dispatch<SetStateAction<boolean>>;
 };
 
 const ROWS = [
@@ -15,10 +16,15 @@ const ROWS = [
 export default function CardCompanyList({
   setCardCompany,
   setCardCompanyColor,
+  setIsShowCardCompanyList,
 }: CardCompanyListProps) {
   return (
     <div className="modal-dimmed">
-      <div className="modal">
+      <div
+        className="modal-top"
+        onClick={() => setIsShowCardCompanyList(false)}
+      />
+      <div className="modal-bottom">
         {ROWS.map((row) => (
           <CardCompanyListRow
             key={row.start}
