@@ -22,6 +22,8 @@ import isFulledCardForm from '../../utils/isFulledCardForm';
 import CardBox from '../CardBox';
 import { isValidDate } from '../../utils/Validation';
 
+import { CARD_COMPANY_LIST } from './CardCompanyListRow';
+
 const cardAlias = '';
 
 type AddCardFormProps = {
@@ -62,6 +64,35 @@ export default function AddCardForm({
 
   const { addCardInList } = useCardsContext();
 
+  const changeCardCompany = () => {
+    const firstNumber = Number(cardNumber.firstNumber);
+    let companyName = '';
+
+    if (firstNumber < 1249) {
+      companyName = '포코';
+    } else if (firstNumber < 2499) {
+      companyName = '준';
+    } else if (firstNumber < 3749) {
+      companyName = '현석';
+    } else if (firstNumber < 4999) {
+      companyName = '윤호';
+    } else if (firstNumber < 6249) {
+      companyName = '환오';
+    } else if (firstNumber < 7499) {
+      companyName = '태은';
+    } else if (firstNumber < 8749) {
+      companyName = '준일';
+    } else if (firstNumber < 9999) {
+      companyName = '은규';
+    }
+
+    setCardCompany(companyName);
+    setCardCompanyColor(
+      CARD_COMPANY_LIST.filter((company) => company.name === companyName)[0]
+        .backgroundColor
+    );
+  };
+
   const isFormFilled = isFulledCardForm({
     cardNumber,
     cardPassword,
@@ -71,6 +102,8 @@ export default function AddCardForm({
 
   const handleClickNext = () => {
     // 어디로 빼야할까
+    changeCardCompany();
+
     if (
       !isValidDate(Number(expirationDate.month), Number(expirationDate.year))
     ) {

@@ -5,7 +5,7 @@ type CardCompanyItem = {
   backgroundColor: string;
 };
 
-const CARD_COMPANY_LIST: CardCompanyItem[] = [
+export const CARD_COMPANY_LIST: CardCompanyItem[] = [
   {
     backgroundColor: '#E24141',
     name: '포코',
