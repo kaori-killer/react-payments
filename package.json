@@ -1,8 +1,26 @@
 {
-  "name": "vite-project",
-  "private": true,
+  "name": "kaori-killer-payments",
+  "description": "페이먼츠 배포", 
+  "private": false,
   "version": "0.0.0",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./browser/specific/main.js": {
+      "import": "./browser/specific/main.js",
+      "require": "./browser/specific/main.js"
+    }
+  },
+  "browser": "./browser/specific/main.js",
+  "keywords": ["react", "component"],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,7 +28,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_1f28d13fc46959b"
+    "chromatic": "npx chromatic --project-token=chpt_1f28d13fc46959b",
+    "prepare": "rm -rf dist && mkdir dist && tsc"
   },
   "dependencies": {
     "classnames": "^2.5.1",
