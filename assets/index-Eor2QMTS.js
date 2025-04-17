@@ -12326,82 +12326,6 @@ const styles$1 = {
   cardForm,
   main
 };
-const card = "_card_c9sja_1";
-const basic = "_basic_c9sja_9";
-const cardBody = "_cardBody_c9sja_13";
-const cardNumber = "_cardNumber_c9sja_16";
-const chip = "_chip_c9sja_22";
-const cardNetwork = "_cardNetwork_c9sja_29";
-const cardHeader = "_cardHeader_c9sja_35";
-const cardNumberDisplay = "_cardNumberDisplay_c9sja_40";
-const styles = {
-  card,
-  basic,
-  cardBody,
-  cardNumber,
-  chip,
-  cardNetwork,
-  cardHeader,
-  cardNumberDisplay
-};
-const masterCard = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAAA5CAYAAABK3Rc8AAAFiUlEQVR4Ae2cT08bRxTA387aa2xcYqAoqdQEQyOQI7W4h5wqtfTUEzH5AFUdqcdWECk9VjRSPwBReqwETq6tIL1VrYQTKZeoEqSVakFTYWgPjQzBqA7g9f7pexvWwsJge+cZ2mZ/0sLuerVCP968mZ03XgUOsLq6GjMMY8KyrHE8TILPUSwJIebRVSaRSOTdk4q7s7y8TAJnIpFIrLOzE0KhEASDQfCppVKpAEqEjY0N+p3HU9eHh4fn6TNH5r7Iub6+Puju7gaf5tjc3HQ25CoJVXK5XBxDdqG3tzeOG/i0xtbWFhQKhaKmaQPoUaSxOfsiPUItORwOx3RdnxSKoqR8kXJEo1H6lRK2bScDgQD4eIc6ayQp6Ce2d/DxjjvqEeDDhi+TEV8mI6fW81j5teq+iPcDB3YpX91XonE4aU5Epl0sgrn0M5Qzd6CSfVAj0kVNvoVS46CNj4GWugJKLHb8PfUi2M+WwPo9A/Zf2RqRLkpP0pEqzo+DciEFinb8PWVR8FHSHhwchHYMj0ji3q3bsDf9lbPfClr6Q4hMfX4oakmilbsF1q/Tzn4riItpUEem2KOWntdxkqh9MvX572Dn+o26UdgsFJ0dk59AGKUS1vo8mA+vtSyxBoxO9dKkI5WLtsokiXvTt4GL4PgViHz2Opi/TQMX4sI4qO/MsDR9VyZ72y5d+xj02bvAiVaYA5ExwXwbD8LAAkU55dzA2CJbLmUdGlFEcouMXDYh9IYJyh5G6C94ogJsUKdlfP++XNo4AJvMFx0NX9MmOhIWbmb1WClhr58HVpwRweObwAGLTOpkdiZvACciSlFpHDqv/oGfbQErJo4MLBxeycIic+fml8BNeMQ88jM1B+zQKEEWaZkUlfrsHeCEopLy5FFQ/hQFYIXyJ3VKMkjLPOmodBF/Ajv0MCCDtEwjex+4CZ61Gl7j5E3Gnp2gvCnTs0vJNJceSz3h1EPtsbGZ201dKzaAHXv9HnhFTuYar0hC7Wz+WhoqcWPhUMkr0pHJjdrTuIm7UEfETp3Zp2aRkmkXt4EbpZVylAH8nFbObHVarRkUrbl8+W9ESibXDPlBbF2B/ypSMhvNhnvBKrUgswP4kZg4lpIZGBkBboyt5mXaUWCHSh1ekZJJdRtuzGenLdN7gEg388Dou8CJrWN0Pm38Z9k4SWxxr36k4tu5UfCK9ONkx8SnwM1uTm14jd2GQqM4OwoySMvUsD7D3atX1hWwGvTq5gCwoyblimws85lu9ZCTnZ+Ojk7zPEYmc08uEhPSJWAWmSGscXPnTv2JqJs7nVzJHZUoUU1+AbKw1YCiM1+zN/fSQxWs57XN3XgThTLXVIMfLLBUKNlkkshX5r5hHcjTAP7vhUA1fxoJ/uGQUztnWuHBWuqlceeZxUesEUrjzuePXgXzchys14APWtmBItWLaeCCfUkhiexa+IEth9L9It/+CCK9IPV0UgNGIjVtTpFEW9ZnukI7JfIopQsaJVCkU8RTUwyOLUIAo8nz8zNF48iUcx+2f8wB2roKzqU8e9dZTmhkHzS8lsRpqZSzYOu4/Gs9mcUtA9bTbKNbOoNx5dx7IC5NtmVZYdtXwdXDXadpUO0ISx50TMKU2BkQ/Rh5mBpajWR3nSbQyozS2ovJXRRG0pRoP0ocbfvC11OR+X/FlemvaWfEl8mIL5MRXyYjJLOo6zr4eIc6IIK+1btULpfBxzvkDz1m6Vu990ulNqwzeYmgL/CbppkRmqZN7+7u5vdfj+DTIuRt/10dWTEwMFDEEL2KJ4u+0NYoFAok0/FHb5GpzryurKwkscnP0Ssmurq66FUJ4HMYy7KcHLm9ve1EJIkcGhpyls4dqlrlcrm0qqofodg4+NQFBeZR6r1QKDRLLds9/w8eIDcphYGoTAAAAABJRU5ErkJggg==";
-const visa = "data:image/png;base64,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";
-const CardNetwork = ({ cardNumbers }) => {
-  const getCardNetworkState = (number) => {
-    if (number === "4") {
-      return "visa";
-    }
-    if (number === "5") {
-      return "master";
-    }
-  };
-  const cardNetworkState = getCardNetworkState(
-    String(cardNumbers.firstNumber)[0]
-  );
-  if (cardNetworkState === "master") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: masterCard, alt: "mastercard", className: styles.cardNetwork });
-  }
-  if (cardNetworkState === "visa") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: visa, alt: "visa", className: styles.cardNetwork });
-  }
-};
-const CardHeader = ({ cardNumbers }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.cardHeader, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.chip }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(CardNetwork, { cardNumbers })
-  ] });
-};
-const CardNumberDisplay = ({
-  cardNumber: cardNumber2,
-  isMasked = false
-}) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: styles.cardNumberDisplay, children: isMasked ? cardNumber2 = "*".repeat(String(cardNumber2).length) : cardNumber2 });
-};
-const CardBody = ({ cardNumbers, cardExpirationDate }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.cardBody, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.cardNumber, children: Object.values(cardNumbers).map((cardNumber2, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      CardNumberDisplay,
-      {
-        cardNumber: String(cardNumber2),
-        isMasked: index > 1
-      },
-      index
-    )) }),
-    cardExpirationDate.month && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: `${cardExpirationDate.month}/${cardExpirationDate.year}` })
-  ] });
-};
-const CardDisplay = ({ cardNumbers, cardExpirationDate }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${styles.card} ${styles.basic}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { cardNumbers }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      CardBody,
-      {
-        cardNumbers,
-        cardExpirationDate
-      }
-    )
-  ] });
-};
 const INITIAL_CARD_NUMBER = {
   firstNumber: "",
   secondNumber: "",
@@ -12531,6 +12455,94 @@ const useCardExpirationDate = () => {
     isError: error2.isError,
     errorMessage: error2.errorMessage
   };
+};
+const card = "_card_c9sja_1";
+const basic = "_basic_c9sja_9";
+const cardBody = "_cardBody_c9sja_13";
+const cardNumber = "_cardNumber_c9sja_16";
+const chip = "_chip_c9sja_22";
+const cardNetwork = "_cardNetwork_c9sja_29";
+const cardHeader = "_cardHeader_c9sja_35";
+const cardNumberDisplay = "_cardNumberDisplay_c9sja_40";
+const styles = {
+  card,
+  basic,
+  cardBody,
+  cardNumber,
+  chip,
+  cardNetwork,
+  cardHeader,
+  cardNumberDisplay
+};
+const CardNumberDisplay = ({
+  cardNumber: cardNumber2,
+  isMasked = false
+}) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: styles.cardNumberDisplay, children: isMasked ? cardNumber2 = "*".repeat(String(cardNumber2).length) : cardNumber2 });
+};
+const CardBody = ({ cardNumbers, cardExpirationDate }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.cardBody, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.cardNumber, children: Object.values(cardNumbers).map((cardNumber2, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CardNumberDisplay,
+      {
+        cardNumber: String(cardNumber2),
+        isMasked: index > 1
+      },
+      index
+    )) }),
+    cardExpirationDate.month && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: `${cardExpirationDate.month}/${cardExpirationDate.year}` })
+  ] });
+};
+const Visa = "data:image/png;base64,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";
+const MasterCard = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAAA5CAYAAABK3Rc8AAAFiUlEQVR4Ae2cT08bRxTA387aa2xcYqAoqdQEQyOQI7W4h5wqtfTUEzH5AFUdqcdWECk9VjRSPwBReqwETq6tIL1VrYQTKZeoEqSVakFTYWgPjQzBqA7g9f7pexvWwsJge+cZ2mZ/0sLuerVCP968mZ03XgUOsLq6GjMMY8KyrHE8TILPUSwJIebRVSaRSOTdk4q7s7y8TAJnIpFIrLOzE0KhEASDQfCppVKpAEqEjY0N+p3HU9eHh4fn6TNH5r7Iub6+Puju7gaf5tjc3HQ25CoJVXK5XBxDdqG3tzeOG/i0xtbWFhQKhaKmaQPoUaSxOfsiPUItORwOx3RdnxSKoqR8kXJEo1H6lRK2bScDgQD4eIc6ayQp6Ce2d/DxjjvqEeDDhi+TEV8mI6fW81j5teq+iPcDB3YpX91XonE4aU5Epl0sgrn0M5Qzd6CSfVAj0kVNvoVS46CNj4GWugJKLHb8PfUi2M+WwPo9A/Zf2RqRLkpP0pEqzo+DciEFinb8PWVR8FHSHhwchHYMj0ji3q3bsDf9lbPfClr6Q4hMfX4oakmilbsF1q/Tzn4riItpUEem2KOWntdxkqh9MvX572Dn+o26UdgsFJ0dk59AGKUS1vo8mA+vtSyxBoxO9dKkI5WLtsokiXvTt4GL4PgViHz2Opi/TQMX4sI4qO/MsDR9VyZ72y5d+xj02bvAiVaYA5ExwXwbD8LAAkU55dzA2CJbLmUdGlFEcouMXDYh9IYJyh5G6C94ogJsUKdlfP++XNo4AJvMFx0NX9MmOhIWbmb1WClhr58HVpwRweObwAGLTOpkdiZvACciSlFpHDqv/oGfbQErJo4MLBxeycIic+fml8BNeMQ88jM1B+zQKEEWaZkUlfrsHeCEopLy5FFQ/hQFYIXyJ3VKMkjLPOmodBF/Ajv0MCCDtEwjex+4CZ61Gl7j5E3Gnp2gvCnTs0vJNJceSz3h1EPtsbGZ201dKzaAHXv9HnhFTuYar0hC7Wz+WhoqcWPhUMkr0pHJjdrTuIm7UEfETp3Zp2aRkmkXt4EbpZVylAH8nFbObHVarRkUrbl8+W9ESibXDPlBbF2B/ypSMhvNhnvBKrUgswP4kZg4lpIZGBkBboyt5mXaUWCHSh1ekZJJdRtuzGenLdN7gEg388Dou8CJrWN0Pm38Z9k4SWxxr36k4tu5UfCK9ONkx8SnwM1uTm14jd2GQqM4OwoySMvUsD7D3atX1hWwGvTq5gCwoyblimws85lu9ZCTnZ+Ojk7zPEYmc08uEhPSJWAWmSGscXPnTv2JqJs7nVzJHZUoUU1+AbKw1YCiM1+zN/fSQxWs57XN3XgThTLXVIMfLLBUKNlkkshX5r5hHcjTAP7vhUA1fxoJ/uGQUztnWuHBWuqlceeZxUesEUrjzuePXgXzchys14APWtmBItWLaeCCfUkhiexa+IEth9L9It/+CCK9IPV0UgNGIjVtTpFEW9ZnukI7JfIopQsaJVCkU8RTUwyOLUIAo8nz8zNF48iUcx+2f8wB2roKzqU8e9dZTmhkHzS8lsRpqZSzYOu4/Gs9mcUtA9bTbKNbOoNx5dx7IC5NtmVZYdtXwdXDXadpUO0ISx50TMKU2BkQ/Rh5mBpajWR3nSbQyozS2ovJXRRG0pRoP0ocbfvC11OR+X/FlemvaWfEl8mIL5MRXyYjJLOo6zr4eIc6IIK+1btULpfBxzvkDz1m6Vu990ulNqwzeYmgL/CbppkRmqZN7+7u5vdfj+DTIuRt/10dWTEwMFDEEL2KJ4u+0NYoFAok0/FHb5GpzryurKwkscnP0Ssmurq66FUJ4HMYy7KcHLm9ve1EJIkcGhpyls4dqlrlcrm0qqofodg4+NQFBeZR6r1QKDRLLds9/w8eIDcphYGoTAAAAABJRU5ErkJggg==";
+const CARD_NETWORKS = [
+  {
+    prefixes: ["40", "41", "42", "43", "44", "45", "46", "47", "48", "49"],
+    name: "visa",
+    image: Visa
+  },
+  {
+    prefixes: ["51", "52", "53", "54", "55"],
+    name: "master",
+    image: MasterCard
+  }
+];
+const CardNetwork = ({ cardNumbers }) => {
+  const getCardNetwork = (number) => {
+    return CARD_NETWORKS.find((network) => network.prefixes.includes(number));
+  };
+  const cardNetwork2 = getCardNetwork(
+    String(cardNumbers.firstNumber).slice(0, 2)
+  );
+  if (!cardNetwork2) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "img",
+    {
+      src: cardNetwork2.image,
+      alt: "mastercard",
+      className: styles.cardNetwork
+    }
+  );
+};
+const CardHeader = ({ cardNumbers }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.cardHeader, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.chip }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardNetwork, { cardNumbers })
+  ] });
+};
+const CardDisplay = ({ cardNumbers, cardExpirationDate }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${styles.card} ${styles.basic}`, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { cardNumbers }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CardBody,
+      {
+        cardNumbers,
+        cardExpirationDate
+      }
+    )
+  ] });
 };
 function App() {
   const {
