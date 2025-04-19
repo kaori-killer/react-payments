@@ -12105,7 +12105,8 @@ const InputField = ({
     "input",
     {
       value,
-      onChange,
+      onChange: (event) => onChange(event.target.value),
+      onBlur: (event) => onChange(event.target.value),
       className: `${styles$3.input} ${isError ? styles$3.error : styles$3.basic}`,
       placeholder
     }
@@ -12142,7 +12143,7 @@ const InputSection = ({
 };
 const CardNumbersInputSection = ({
   cardNumbers,
-  setCardNumbers,
+  handleCardNumbersChange,
   isError,
   errorMessage
 }) => {
@@ -12158,7 +12159,7 @@ const CardNumbersInputSection = ({
             InputField,
             {
               value: cardNumbers.firstNumber,
-              onChange: setCardNumbers("firstNumber"),
+              onChange: handleCardNumbersChange("firstNumber"),
               isError: isError.firstNumber,
               placeholder: "1234"
             }
@@ -12167,7 +12168,7 @@ const CardNumbersInputSection = ({
             InputField,
             {
               value: cardNumbers.secondNumber,
-              onChange: setCardNumbers("secondNumber"),
+              onChange: handleCardNumbersChange("secondNumber"),
               isError: isError.secondNumber,
               placeholder: "1234"
             }
@@ -12176,7 +12177,7 @@ const CardNumbersInputSection = ({
             InputField,
             {
               value: cardNumbers.thirdNumber,
-              onChange: setCardNumbers("thirdNumber"),
+              onChange: handleCardNumbersChange("thirdNumber"),
               isError: isError.thirdNumber,
               placeholder: "1234"
             }
@@ -12185,7 +12186,7 @@ const CardNumbersInputSection = ({
             InputField,
             {
               value: cardNumbers.fourthNumber,
-              onChange: setCardNumbers("fourthNumber"),
+              onChange: handleCardNumbersChange("fourthNumber"),
               isError: isError.fourthNumber,
               placeholder: "1234"
             }
@@ -12198,7 +12199,7 @@ const CardNumbersInputSection = ({
 };
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
-  setCardExpirationDate,
+  handleCardExpirationDateChange,
   isError,
   errorMessage
 }) => {
@@ -12214,7 +12215,7 @@ const CardExpirationDateInputSection = ({
             InputField,
             {
               value: cardExpirationDate.month,
-              onChange: setCardExpirationDate("month"),
+              onChange: handleCardExpirationDateChange("month"),
               isError: isError.month,
               placeholder: "MM"
             }
@@ -12223,7 +12224,7 @@ const CardExpirationDateInputSection = ({
             InputField,
             {
               value: cardExpirationDate.year,
-              onChange: setCardExpirationDate("year"),
+              onChange: handleCardExpirationDateChange("year"),
               isError: isError.year,
               placeholder: "YY"
             }
@@ -12234,8 +12235,8 @@ const CardExpirationDateInputSection = ({
     /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorMessage, { message: errorMessage })
   ] });
 };
-const useError = (initiallError) => {
-  const [isError, setIsError] = reactExports.useState(initiallError);
+const useError = (initialError) => {
+  const [isError, setIsError] = reactExports.useState(initialError);
   const [errorMessage, setErrorMessage] = reactExports.useState("");
   const clearError = (target) => {
     setIsError((prev) => ({ ...prev, [target]: false }));
@@ -12279,26 +12280,26 @@ const useCardCVCNumber = () => {
     }
     return { isError: false, errorMessage: "" };
   };
-  const handleCardCVCNumberChange = (event) => {
+  const handleCardCVCNumberChange = (value) => {
     const { isError, errorMessage } = getCardCVCNumberChangeValidationResult(
-      event.target.value.trim()
+      value.trim()
     );
     if (isError) {
       setErrorField("cvcNumber", errorMessage);
       return;
     }
     clearError("cvcNumber");
-    setCardCVCNumber(event.target.value.trim());
+    setCardCVCNumber(value.trim());
   };
   return {
     cardCVCNumber,
-    setCardCVCNumber: handleCardCVCNumberChange,
+    handleCardCVCNumberChange,
     isError: error2.isError,
     errorMessage: error2.errorMessage
   };
 };
 const CardCVCNumberInputSection = () => {
-  const { cardCVCNumber, setCardCVCNumber, isError, errorMessage } = useCardCVCNumber();
+  const { cardCVCNumber, handleCardCVCNumberChange, isError, errorMessage } = useCardCVCNumber();
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       InputSection,
@@ -12310,7 +12311,7 @@ const CardCVCNumberInputSection = () => {
           InputField,
           {
             value: cardCVCNumber,
-            onChange: setCardCVCNumber,
+            onChange: handleCardCVCNumberChange,
             isError: isError.cvcNumber,
             placeholder: "123"
           }
@@ -12350,9 +12351,9 @@ const useCardNumbers = () => {
     }
     return { isError: false, errorMessage: "" };
   };
-  const handleCardNumbersChange = (target) => (event) => {
+  const handleCardNumbersChange = (target) => (value) => {
     const { isError, errorMessage } = getCardNumbersValidationResult(
-      event.target.value.trim()
+      value.trim()
     );
     if (isError) {
       setErrorField(target, errorMessage);
@@ -12361,12 +12362,12 @@ const useCardNumbers = () => {
     clearError(target);
     setCardNumbers({
       ...cardNumbers,
-      [target]: event.target.value.trim()
+      [target]: value.trim()
     });
   };
   return {
     cardNumbers,
-    setCardNumbers: handleCardNumbersChange,
+    handleCardNumbersChange,
     isError: error2.isError,
     errorMessage: error2.errorMessage
   };
@@ -12379,6 +12380,43 @@ const isValidNumberRange = ({
   if (value < min) return false;
   if (value > max) return false;
   return true;
+};
+const getCurrentYear = () => {
+  return (/* @__PURE__ */ new Date()).getFullYear() % 100;
+};
+const getCurrentMonth = () => {
+  return Math.floor((/* @__PURE__ */ new Date()).getMonth() + 1);
+};
+const validateMonth = ({ month, year }) => {
+  if (!isValidNumberRange({ value: month, min: 1, max: 12 })) {
+    return {
+      isError: true,
+      errorMessage: "01 ~ 12 사이의 숫자만 입력 가능합니다"
+    };
+  }
+  if (year === getCurrentYear()) {
+    if (month < getCurrentMonth()) {
+      return { isError: true, errorMessage: "유효기간이 지났습니다" };
+    }
+  }
+  return { isError: false, errorMessage: "" };
+};
+const validateYear = ({ month, year }) => {
+  if (!isValidNumberRange({ value: year, min: 0, max: 99 })) {
+    return {
+      isError: true,
+      errorMessage: "00 ~ 99 사이의 숫자만 입력 가능합니다"
+    };
+  }
+  if (year < getCurrentYear()) {
+    return { isError: true, errorMessage: "유효기간이 지났습니다" };
+  }
+  if (year === getCurrentYear()) {
+    if (month !== 0 && month < getCurrentMonth()) {
+      return { isError: true, errorMessage: "유효기간이 지났습니다" };
+    }
+  }
+  return { isError: false, errorMessage: "" };
 };
 const INITIAL_CARD_EXPIRATION_DATE = {
   month: "",
@@ -12404,40 +12442,23 @@ const useCardExpirationDate = () => {
       return { isError: true, errorMessage: "2자리 숫자만 입력 가능합니다" };
     }
     if (target === "month") {
-      if (!isValidNumberRange({ value: Number(input2), min: 1, max: 12 })) {
-        return {
-          isError: true,
-          errorMessage: "01 ~ 12 사이의 숫자만 입력 가능합니다"
-        };
-      }
-      if (Number(cardExpirationDate.year) === (/* @__PURE__ */ new Date()).getFullYear() % 100) {
-        if (Number(input2) < Math.floor((/* @__PURE__ */ new Date()).getMonth() + 1)) {
-          return { isError: true, errorMessage: "유효기간이 지났습니다" };
-        }
-      }
+      return validateMonth({
+        month: Number(input2),
+        year: Number(cardExpirationDate.year)
+      });
     }
     if (target === "year") {
-      if (!isValidNumberRange({ value: Number(input2), min: 0, max: 99 })) {
-        return {
-          isError: true,
-          errorMessage: "00 ~ 99 사이의 숫자만 입력 가능합니다"
-        };
-      }
-      if (Number(input2) < Math.floor((/* @__PURE__ */ new Date()).getFullYear() % 100)) {
-        return { isError: true, errorMessage: "유효기간이 지났습니다" };
-      }
-      if (Number(input2) === Math.floor((/* @__PURE__ */ new Date()).getFullYear() % 100)) {
-        if (cardExpirationDate.month !== "" && Number(cardExpirationDate.month) < (/* @__PURE__ */ new Date()).getMonth() + 1) {
-          return { isError: true, errorMessage: "유효기간이 지났습니다" };
-        }
-      }
+      return validateYear({
+        month: Number(cardExpirationDate.month),
+        year: Number(input2)
+      });
     }
     return { isError: false, errorMessage: "" };
   };
-  const handleCardExpirationDateChange = (target) => (event) => {
+  const handleCardExpirationDateChange = (target) => (value) => {
     const { isError, errorMessage } = getCardExpirationDateValidationResult(
       target,
-      event.target.value.trim()
+      value.trim()
     );
     if (isError) {
       setErrorField(target, errorMessage);
@@ -12446,12 +12467,12 @@ const useCardExpirationDate = () => {
     clearError(target);
     setCardExpirationDate({
       ...cardExpirationDate,
-      [target]: event.target.value.trim()
+      [target]: value.trim()
     });
   };
   return {
     cardExpirationDate,
-    setCardExpirationDate: handleCardExpirationDateChange,
+    handleCardExpirationDateChange,
     isError: error2.isError,
     errorMessage: error2.errorMessage
   };
@@ -12547,13 +12568,13 @@ const CardDisplay = ({ cardNumbers, cardExpirationDate }) => {
 function App() {
   const {
     cardNumbers,
-    setCardNumbers,
+    handleCardNumbersChange,
     isError: isCardNumbersError,
     errorMessage: cardNumbersErrorMessage
   } = useCardNumbers();
   const {
     cardExpirationDate,
-    setCardExpirationDate,
+    handleCardExpirationDateChange,
     isError: isCardExpirationDateError,
     errorMessage: cardExpirationDateErrorMessage
   } = useCardExpirationDate();
@@ -12570,7 +12591,7 @@ function App() {
         CardNumbersInputSection,
         {
           cardNumbers,
-          setCardNumbers,
+          handleCardNumbersChange,
           isError: isCardNumbersError,
           errorMessage: cardNumbersErrorMessage
         }
@@ -12579,7 +12600,7 @@ function App() {
         CardExpirationDateInputSection,
         {
           cardExpirationDate,
-          setCardExpirationDate,
+          handleCardExpirationDateChange,
           isError: isCardExpirationDateError,
           errorMessage: cardExpirationDateErrorMessage
         }
