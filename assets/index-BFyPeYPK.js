@@ -14297,15 +14297,15 @@ new TextEncoder();
   ...NO_BODY_STATUS_CODES,
   304
 ]);
-const card = "_card_10d5c_1";
-const basic$1 = "_basic_10d5c_17";
-const cardBody = "_cardBody_10d5c_25";
-const cardNumber = "_cardNumber_10d5c_31";
-const box = "_box_10d5c_41";
-const chip = "_chip_10d5c_51";
-const cardNetwork = "_cardNetwork_10d5c_65";
-const cardHeader = "_cardHeader_10d5c_77";
-const cardNumberDisplay = "_cardNumberDisplay_10d5c_87";
+const card = "_card_1r93x_1";
+const basic$1 = "_basic_1r93x_9";
+const cardBody = "_cardBody_1r93x_13";
+const cardNumber = "_cardNumber_1r93x_16";
+const box = "_box_1r93x_21";
+const chip = "_chip_1r93x_26";
+const cardNetwork = "_cardNetwork_1r93x_33";
+const cardHeader = "_cardHeader_1r93x_39";
+const cardNumberDisplay = "_cardNumberDisplay_1r93x_44";
 const styles$7 = {
   card,
   basic: basic$1,
@@ -14401,16 +14401,16 @@ const CardDisplay = ({
     }
   );
 };
-const error$1 = "_error_2ik6c_1";
+const error$1 = "_error_1baob_1";
 const styles$6 = {
   error: error$1
 };
 const ErrorMessage = ({ message }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: styles$6.error, children: message });
 };
-const basic = "_basic_qz9nq_1";
-const error = "_error_qz9nq_17";
-const input = "_input_qz9nq_33";
+const basic = "_basic_8n5l7_1";
+const error = "_error_8n5l7_10";
+const input = "_input_8n5l7_18";
 const styles$5 = {
   basic,
   error,
@@ -14438,10 +14438,10 @@ const InputField = reactExports.forwardRef(
     }
   )
 );
-const title = "_title_1xrsa_1";
-const description = "_description_1xrsa_9";
-const subtitle = "_subtitle_1xrsa_19";
-const inputContainer = "_inputContainer_1xrsa_27";
+const title = "_title_m1r3g_1";
+const description = "_description_m1r3g_5";
+const subtitle = "_subtitle_m1r3g_10";
+const inputContainer = "_inputContainer_m1r3g_14";
 const styles$4 = {
   title,
   description,
@@ -14475,12 +14475,6 @@ const CardNumbersInputSection = ({
   setRef,
   moveFocus
 }) => {
-  const handleChange = (field, index) => (value) => {
-    handleCardNumbersChange(field)(value);
-    if (cardNumbers[field].length === 4) {
-      moveFocus(index);
-    }
-  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       InputSection,
@@ -14498,7 +14492,11 @@ const CardNumbersInputSection = ({
           {
             id: index,
             value: cardNumbers[field],
-            onChange: handleChange(field, index),
+            onChange: (value) => handleCardNumbersChange(field)(
+              value,
+              index,
+              moveFocus
+            ),
             isError: isError[field],
             placeholder: "1234",
             setRef
@@ -14532,8 +14530,7 @@ const CardExpirationDateInputSection = ({
               id: 5,
               value: cardExpirationDate.month,
               onChange: (value) => {
-                handleCardExpirationDateChange("month")(value);
-                if (cardExpirationDate["month"].length === 2) moveFocus(5);
+                handleCardExpirationDateChange("month")(value, 5, moveFocus);
               },
               isError: isError.month,
               placeholder: "MM",
@@ -14546,8 +14543,7 @@ const CardExpirationDateInputSection = ({
               id: 6,
               value: cardExpirationDate.year,
               onChange: (value) => {
-                handleCardExpirationDateChange("year")(value);
-                if (cardExpirationDate["year"].length === 2) moveFocus(6);
+                handleCardExpirationDateChange("year")(value, 6, moveFocus);
               },
               isError: isError.year,
               placeholder: "YY",
@@ -14580,10 +14576,7 @@ const CardCVCNumberInputSection = ({
           {
             id: 7,
             value: cardCVCNumber,
-            onChange: (value) => {
-              handleCardCVCNumberChange(value);
-              if (cardCVCNumber.length === 3) moveFocus(7);
-            },
+            onChange: (value) => handleCardCVCNumberChange(value, 7, moveFocus),
             isError: isError.cvcNumber,
             placeholder: "123",
             setRef
@@ -14594,7 +14587,7 @@ const CardCVCNumberInputSection = ({
     /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorMessage, { message: errorMessage })
   ] });
 };
-const placeholder = "_placeholder_7ut39_1";
+const placeholder = "_placeholder_2kt8c_1";
 const styles$3 = {
   placeholder
 };
@@ -14632,8 +14625,7 @@ const CardCompanyInputSection = ({
           {
             value: selectedOption,
             onChange: (value) => {
-              handleCardNumbersChange(value);
-              moveFocus(4);
+              handleCardNumbersChange(value, 4, moveFocus);
             },
             options: companies,
             ref: setRef(4)
@@ -14729,7 +14721,7 @@ const useCardNumbers = () => {
     }
     return { isError: false, errorMessage: "" };
   };
-  const handleCardNumbersChange = (target) => (value) => {
+  const handleCardNumbersChange = (target) => (value, index, moveFocus) => {
     const { isError, errorMessage } = getCardNumbersValidationResult(
       value.trim()
     );
@@ -14742,6 +14734,9 @@ const useCardNumbers = () => {
       ...cardNumbers,
       [target]: value.trim()
     });
+    if (value.trim().length === 4) {
+      moveFocus(index);
+    }
   };
   return {
     cardNumbers,
@@ -14833,7 +14828,7 @@ const useCardExpirationDate = () => {
     }
     return { isError: false, errorMessage: "" };
   };
-  const handleCardExpirationDateChange = (target) => (value) => {
+  const handleCardExpirationDateChange = (target) => (value, index, moveFocus) => {
     const { isError, errorMessage } = getCardExpirationDateValidationResult(
       target,
       value.trim()
@@ -14847,6 +14842,9 @@ const useCardExpirationDate = () => {
       ...cardExpirationDate,
       [target]: value.trim()
     });
+    if (value.trim().length === 2) {
+      moveFocus(index);
+    }
   };
   return {
     cardExpirationDate,
@@ -14867,7 +14865,7 @@ const getCardCompanyChangeValidationResult = (input2) => {
 const useCardCompany = () => {
   const [cardCompany, setCardCompany] = reactExports.useState("");
   const { error: error2, setErrorField, clearError } = useError(INITIAL_IS_ERROR$2);
-  const handleCardCompanyChange = (value) => {
+  const handleCardCompanyChange = (value, index, moveFocus) => {
     const { isError, errorMessage } = getCardCompanyChangeValidationResult(
       value.trim()
     );
@@ -14877,6 +14875,9 @@ const useCardCompany = () => {
     }
     clearError("cardCompany");
     setCardCompany(value.trim());
+    if (value.trim().length > 1) {
+      moveFocus(index);
+    }
   };
   return {
     cardCompany,
@@ -14933,7 +14934,7 @@ const useCardCVCNumber = () => {
     }
     return { isError: false, errorMessage: "" };
   };
-  const handleCardCVCNumberChange = (value) => {
+  const handleCardCVCNumberChange = (value, index, moveFocus) => {
     const { isError, errorMessage } = getCardCVCNumberChangeValidationResult(
       value.trim()
     );
@@ -14943,6 +14944,9 @@ const useCardCVCNumber = () => {
     }
     clearError("cvcNumber");
     setCardCVCNumber(value.trim());
+    if (value.trim().length === 3) {
+      moveFocus(index);
+    }
   };
   return {
     cardCVCNumber,
@@ -14962,14 +14966,14 @@ function useAutoFocus() {
   };
   return { setRef, moveFocus };
 }
-const cardForm = "_cardForm_1do51_1";
-const main = "_main_1do51_11";
+const cardForm = "_cardForm_29pnk_1";
+const main = "_main_29pnk_6";
 const styles$2 = {
   cardForm,
   main
 };
-const button = "_button_1bdgm_1";
-const link = "_link_1bdgm_17";
+const button = "_button_jz6sz_1";
+const link = "_link_jz6sz_15";
 const styles$1 = {
   button,
   link
@@ -14979,7 +14983,7 @@ const Button = ({
   link: link2,
   onClick
 }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: styles$1.button, onClick, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: { pathname: link2 }, className: styles$1.link, children: text }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: { pathname: link2 }, className: styles$1.link, children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: styles$1.button, onClick, children: text }) });
 };
 const COMPANIES = [
   { value: "BC카드", label: "BC카드", color: "#F04651" },
@@ -14992,15 +14996,10 @@ const COMPANIES = [
   { value: "국민카드", label: "국민카드", color: "#6A6056" }
 ];
 const extractCardCompanyColor = (company) => {
-  const BASIC_COLOR = "#000000";
-  const companyData = COMPANIES.find((item) => item.value === company);
-  return companyData ? companyData.color : BASIC_COLOR;
+  var _a;
+  return ((_a = COMPANIES.find((item) => item.value === company)) == null ? void 0 : _a.color) || "#000000";
 };
-const isFulledInput = (items, condition) => {
-  return Object.values(items).every((item) => {
-    return item.length >= condition;
-  });
-};
+const isFulledInput = (items, condition) => Object.values(items).every((item) => item.length >= condition);
 function Card({ setNewCard }) {
   const {
     cardNumbers,
@@ -15031,17 +15030,34 @@ function Card({ setNewCard }) {
     isError: isCardCVCError,
     errorMessage: cardCVCErrorMessage
   } = useCardCVCNumber();
-  const isFulledForm = isFulledInput(cardNumbers, 4) && isFulledInput(cardExpirationDate, 2) && cardCompany.length > 0 && cardPassword.length == 2 && cardCVCNumber.length === 3;
-  const onClick = () => {
-    setNewCard({
-      cardNumbers,
-      cardExpirationDate,
-      cardCompany,
-      cardPassword
-    });
-  };
   const { setRef, moveFocus } = useAutoFocus();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.main, children: [
+  const [visibility, setVisibility] = reactExports.useState({
+    company: false,
+    expiration: false,
+    cvc: false,
+    password: false
+  });
+  reactExports.useEffect(() => {
+    if (isFulledInput(cardNumbers, 4))
+      setVisibility((v) => ({ ...v, company: true }));
+  }, [cardNumbers]);
+  reactExports.useEffect(() => {
+    if (cardCompany.length > 0)
+      setVisibility((v) => ({ ...v, expiration: true }));
+  }, [cardCompany]);
+  reactExports.useEffect(() => {
+    if (isFulledInput(cardExpirationDate, 2))
+      setVisibility((v) => ({ ...v, cvc: true }));
+  }, [cardExpirationDate]);
+  reactExports.useEffect(() => {
+    if (cardCVCNumber.length === 3)
+      setVisibility((v) => ({ ...v, password: true }));
+  }, [cardCVCNumber]);
+  const isFulledForm = isFulledInput(cardNumbers, 4) && isFulledInput(cardExpirationDate, 2) && cardCompany.length > 0 && cardPassword.length === 2 && cardCVCNumber.length === 3;
+  const onClick = () => {
+    setNewCard({ cardNumbers, cardExpirationDate, cardCompany, cardPassword });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.main, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       CardDisplay,
       {
@@ -15051,7 +15067,7 @@ function Card({ setNewCard }) {
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.cardForm, children: [
-      cardCVCNumber.length === 3 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      visibility.password && /* @__PURE__ */ jsxRuntimeExports.jsx(
         CardPasswordInputSection,
         {
           cardPassword,
@@ -15061,7 +15077,7 @@ function Card({ setNewCard }) {
           setRef
         }
       ),
-      isFulledInput(cardExpirationDate, 2) && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      visibility.cvc && /* @__PURE__ */ jsxRuntimeExports.jsx(
         CardCVCNumberInputSection,
         {
           cardCVCNumber,
@@ -15072,7 +15088,7 @@ function Card({ setNewCard }) {
           moveFocus
         }
       ),
-      cardCompany.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      visibility.expiration && /* @__PURE__ */ jsxRuntimeExports.jsx(
         CardExpirationDateInputSection,
         {
           cardExpirationDate,
@@ -15083,7 +15099,7 @@ function Card({ setNewCard }) {
           moveFocus
         }
       ),
-      isFulledInput(cardNumbers, 4) && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      visibility.company && /* @__PURE__ */ jsxRuntimeExports.jsx(
         CardCompanyInputSection,
         {
           companies: COMPANIES,
@@ -15114,10 +15130,10 @@ function Card({ setNewCard }) {
         onClick
       }
     ) })
-  ] }) });
+  ] });
 }
 const cardComplete = "data:image/png;base64,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";
-const container = "_container_1i802_1";
+const container = "_container_16fpd_1";
 const styles = {
   container
 };
